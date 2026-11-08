@@ -1,0 +1,41 @@
+---
+import Icon from './Icon.astro';
+import { contact, serviceOptions } from '../data/site';
+---
+<dialog id="request-dialog" class="request-dialog" aria-labelledby="request-title" data-email={contact.email} data-whatsapp={contact.whatsapp}>
+  <div class="dialog-topline"><span class="eyebrow">EL SIGUIENTE PASO</span><button type="button" class="icon-button" data-close aria-label="Cerrar formulario"><Icon name="close" /></button></div>
+  <h2 id="request-title">Todo empieza<br />por escucharte<span class="lime-text">.</span></h2>
+  <p>Cuéntanos qué necesitas. Lo pensamos contigo.</p>
+  <form id="request-form" novalidate>
+    <fieldset class="service-options">
+      <legend>¿En qué podemos ayudarte? <span>*</span></legend>
+      <p class="field-help">Puedes elegir más de una opción.</p>
+      <div class="option-grid">{serviceOptions.map(option => <label><input type="checkbox" name="services" value={option} /><span>{option}<Icon name="plus" size={16} /></span></label>)}</div>
+    </fieldset>
+    <div class="field-pair">
+      <div><label for="request-name">Nombre y apellidos <span>*</span></label><input id="request-name" name="name" autocomplete="name" placeholder="Tu nombre" maxlength="150" required /></div>
+      <div><label for="request-email">Correo electrónico <span>*</span></label><input id="request-email" name="email" type="email" autocomplete="email" placeholder="tu@email.com" maxlength="254" required /></div>
+    </div>
+    <label for="request-message">Un poco más sobre tu proyecto <span class="optional">opcional</span></label>
+    <textarea id="request-message" name="message" rows="3" placeholder="Tu punto de partida, una idea, lo que te gustaría conseguir…" maxlength="3000"></textarea>
+    <p class="field-help">No incluyas información médica ni datos de pacientes.</p>
+    <p class="preview-note">{contact.email || contact.whatsapp ? 'Se abrirá tu aplicación de contacto para que revises y envíes la solicitud.' : 'Vista previa. El envío de solicitudes estará disponible próximamente. Tus datos no se envían ni se guardan.'}</p>
+    <button class="button button-lime full-width" type="submit">{contact.email || contact.whatsapp ? 'Preparar solicitud' : 'Revisar solicitud'}<Icon /></button>
+    <p class="form-status" role="status" tabindex="-1" hidden></p>
+  </form>
+</dialog>
+<dialog id="whatsapp-dialog" class="small-dialog" aria-labelledby="whatsapp-title">
+  <button class="icon-button dialog-close" data-close aria-label="Cerrar aviso"><Icon name="close" /></button>
+  <span class="dialog-symbol"><Icon name="whatsapp" size={36} /></span>
+  <h2 id="whatsapp-title">Pronto, a un mensaje de distancia.</h2>
+  <p>El contacto por WhatsApp estará disponible próximamente.</p>
+  <button class="button button-dark" data-open-request>Cuéntanos qué necesitas<Icon /></button>
+</dialog>
+<dialog id="privacy-dialog" class="small-dialog" aria-labelledby="privacy-title">
+  <button class="icon-button dialog-close" data-close aria-label="Cerrar privacidad"><Icon name="close" /></button>
+  <span class="eyebrow">PRIVACIDAD</span>
+  <h2 id="privacy-title">Tus datos, con cuidado.</h2>
+  <p>Esta versión de la web no envía ni almacena los datos introducidos en los formularios. La auditoría digital está en fase de preparación.</p>
+  <p>No utilizamos cookies de seguimiento ni herramientas de analítica. Las tipografías y las imágenes se sirven desde esta web.</p>
+  <p>Cuando se habilite el contacto por email o WhatsApp, podrás revisar el mensaje en tu aplicación antes de enviarlo. Ese servicio tendrá su propia política de privacidad.</p>
+</dialog>

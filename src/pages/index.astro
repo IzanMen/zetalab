@@ -1,0 +1,117 @@
+---
+import { Image } from 'astro:assets';
+import fontUrl from '@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2';
+import '../styles/global.css';
+import Icon from '../components/Icon.astro';
+import Logo from '../components/Logo.astro';
+import AuditForm from '../components/AuditForm.astro';
+import ContactDialogs from '../components/ContactDialogs.astro';
+import { contact, services, differentials } from '../data/site';
+import hero from '../assets/hero.png';
+import strategy from '../assets/strategy.jpg';
+import content from '../assets/content.jpg';
+import advertising from '../assets/advertising.jpg';
+import management from '../assets/management.jpg';
+const serviceImages = { strategy, content, advertising, management };
+const whatsappUrl = contact.whatsapp ? `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent('Hola, ZETA LAB. Me gustaría hablar sobre mi proyecto.')}` : '#contacto';
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#11130f" />
+    <meta name="description" content="ZETA LAB. Marketing y comunicación especializados en salud. Estrategia, contenido, publicidad y conversión para clínicas, profesionales y empresas del sector salud." />
+    <meta property="og:title" content="ZETA LAB — Think & Connect" />
+    <meta property="og:description" content="No se trata solo de comunicar. Es saber qué decir, cómo y a quién. Marketing y comunicación especializados en salud." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_ES" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preload" href={fontUrl} as="font" type="font/woff2" crossorigin />
+    <title>ZETA LAB — Marketing y comunicación especializados en salud</title>
+  </head>
+  <body>
+    <a href="#contenido" class="skip-link">Saltar al contenido</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <Logo />
+        <nav aria-label="Navegación principal" id="main-nav">
+          <a href="#inicio" aria-current="location">Inicio</a>
+          <a href="#servicios">Servicios</a>
+          <a href="#metodo">Cómo trabajamos</a>
+          <a href="#contacto">Contacto</a>
+        </nav>
+        <a class="header-cta" href="#analisis">Analicemos tu marca <Icon name="diagonal" size={17} /></a>
+        <button class="menu-button" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav"><span></span><span></span></button>
+      </div>
+    </header>
+    <main id="contenido">
+      <section id="inicio" class="hero journey-section" aria-labelledby="hero-title" data-guide="Nos conocemos" data-next="Conoce los servicios" data-target="#servicios">
+        <div class="hero-photo"><Image src={hero} alt="Profesional sanitaria mirando hacia la luz en una clínica" widths={[640, 960, 1440, hero.width]} sizes="100vw" format="webp" quality={82} loading="eager" fetchpriority="high" /></div>
+        <div class="hero-shade"></div>
+        <div class="container hero-content">
+          <div class="hero-topline"><span class="eyebrow"><span class="status-dot"></span> Marketing especializado en salud</span><span class="hero-coordinate">ESTRATEGIA + CREATIVIDAD + TECNOLOGÍA</span></div>
+          <h1 id="hero-title">No se trata solo<br />de comunicar.<br /><span>Es saber qué decir,<br />cómo y a quién.</span></h1>
+          <p class="hero-intro">En ZETA LAB somos una agencia de marketing y comunicación especializada en el sector salud.</p>
+          <a class="button button-lime" href="#contacto">Hablemos de tu proyecto <Icon name="diagonal" size={21} /></a>
+          <div class="hero-bottom"><span class="hero-note">Personas. Marcas. Conexiones reales.</span><a href="#nosotros" class="scroll-link">Hay mucho que podemos hacer juntos <Icon name="down" size={18} /></a></div>
+        </div>
+        <span class="photo-caption" aria-hidden="true">La conexión empieza<br />con las personas.<i></i></span>
+        <span class="hero-side-label" aria-hidden="true">THINK HUMAN. CONNECT BETTER.</span>
+      </section>
+
+      <section id="nosotros" class="intro-section section-space" aria-labelledby="intro-title">
+        <div class="container">
+          <div class="intro-layout" data-reveal>
+            <span class="eyebrow"><span class="section-tick"></span> EL PUNTO DE PARTIDA ERES TÚ</span>
+            <div><h2 id="intro-title">Entender tu mundo.<br /><span class="muted-text">Para conectar con el suyo.</span></h2><p>Trabajamos con clínicas, centros médicos, profesionales sanitarios y empresas del sector para desarrollar estrategias que combinan conocimiento, creatividad y tecnología.</p><p>Construimos marcas, desarrollamos comunicación y conectamos negocios con las personas adecuadas.</p></div>
+          </div>
+          <div class="differentials-heading"><span class="eyebrow">Nuestros diferenciales</span><span>Lo que somos. En cada proyecto.</span></div>
+          <div class="differentials">{differentials.map((item, i) => <article data-reveal><div class="differential-top"><Icon name={item.icon} size={29} /><span>0{i + 1}</span></div><h3>{item.title}</h3><p>{item.text}</p></article>)}</div>
+        </div>
+      </section>
+
+      <section id="servicios" class="services-section section-space journey-section" aria-labelledby="services-title" data-guide="Encontramos tu camino" data-next="Miremos tu marca" data-target="#analisis">
+        <div class="container">
+          <div class="section-heading" data-reveal><div><span class="eyebrow"><span class="section-tick"></span> NUESTROS SERVICIOS</span><h2 id="services-title">Una estrategia.<br /><span class="muted-text">Cuatro áreas de trabajo.</span></h2></div><div class="heading-aside"><p>Servicios de marketing digital para clínicas y empresas del sector salud</p><p>Integramos diferentes disciplinas del marketing y la comunicación para ofrecer soluciones adaptadas a las necesidades de cada proyecto.</p></div></div>
+          <div class="services-grid">{services.map((service, i) => <article class="service-card" data-reveal>
+            <div class="service-image"><Image src={serviceImages[service.image as keyof typeof serviceImages]} alt={service.alt} widths={[360, 640]} sizes="(max-width: 600px) 90vw, (max-width: 1000px) 45vw, 23vw" width={640} height={480} fit="cover" format="webp" loading="lazy" /><span>0{i + 1}</span></div>
+            <p class="service-short">{service.short}</p>
+            <details class="service-detail"><summary><h3>{service.title}</h3><span class="service-toggle"><Icon name="plus" size={22} /></span></summary><div class="service-description"><p>{service.description}</p><ul>{service.items.map(item => <li>{item}</li>)}</ul><button class="text-link" data-open-request data-service={service.request}>Hablemos de esto <Icon name="diagonal" size={17} /></button></div></details>
+          </article>)}</div>
+          <div class="services-bottom"><p>Cuatro áreas que se conectan.<br /><strong>Un proyecto en el centro: el tuyo.</strong></p><button id="expand-services" class="text-link">Descubrir todos los servicios <Icon name="arrow" size={20} /></button></div>
+        </div>
+      </section>
+
+      <section id="analisis" class="audit-section section-space journey-section" aria-labelledby="audit-title" data-guide="Miramos dónde estás" data-next="Tu punto de partida" data-target="#audit-form">
+        <div class="container audit-layout">
+          <div class="audit-copy" data-reveal><span class="eyebrow"><span class="section-tick"></span> ANÁLISIS DE PRESENCIA DIGITAL</span><h2 id="audit-title">Una mirada<br />estratégica sobre<br />tu presencia digital<span class="lime-text">.</span></h2><p class="section-subtitle">Análisis de presencia digital para clínicas y empresas</p><p>¿Tu clínica está comunicando correctamente sus servicios? ¿Tu marca llega al público adecuado? ¿Estás aprovechando todas las oportunidades que ofrecen los canales digitales?</p><p>En ZETA LAB analizamos tu presencia online, tu comunicación, tu posicionamiento y tus acciones de marketing para identificar oportunidades de mejora.</p><details class="audit-more"><summary>Una perspectiva para avanzar <Icon name="plus" size={17} /></summary><p>Estudiamos tu situación actual y elaboramos recomendaciones estratégicas adaptadas a las necesidades y objetivos de tu negocio.</p><p>Solicita un análisis de tu presencia digital y descubre nuevas oportunidades para tu marca.</p></details><div class="audit-benefits"><span><Icon name="clock" size={18} /> A tu ritmo</span><span><Icon name="shield" size={18} /> Sin compromiso</span></div><p class="audit-invitation">¿Quieres mejorar la presencia digital de tu clínica o marca personal? Analizamos tu situación y te proponemos una estrategia adaptada a tus objetivos.</p></div>
+          <AuditForm />
+        </div>
+      </section>
+
+      <section id="metodo" class="method-section section-space journey-section" aria-labelledby="method-title" data-guide="Lo construimos juntos" data-next="Demos el primer paso" data-target="#contacto">
+        <div class="container">
+          <div class="section-heading" data-reveal><div><span class="eyebrow"><span class="section-tick"></span> NUESTRA FORMA DE TRABAJAR</span><h2 id="method-title">Pensar juntos.<br />Crear juntos.<br /><span class="muted-text">Conectar de verdad.</span></h2></div><div class="heading-aside"><span class="method-mark" aria-hidden="true"><span></span><span></span><span></span><i></i></span><h3>Estrategia, creatividad y acompañamiento</h3><p>Creemos que las mejores estrategias nacen del diálogo, el conocimiento y el trabajo conjunto.</p></div></div>
+          <div class="method-steps">
+            <article data-reveal><span class="step-marker">01<i></i></span><h3>Primero, escuchamos.</h3><p>Antes de proponer soluciones, escuchamos, analizamos y entendemos las necesidades de cada proyecto.</p></article>
+            <article data-reveal><span class="step-marker">02<i></i></span><h3>Después, construimos.</h3><p>Nos implicamos en cada etapa para aportar ideas, desarrollar estrategias y construir soluciones que respondan a objetivos reales.</p></article>
+            <article data-reveal><span class="step-marker">03<i></i></span><h3>Siempre, contigo.</h3><p>No trabajamos con fórmulas estándar. Cada marca, cada clínica y cada proyecto necesita una estrategia propia.</p></article>
+          </div>
+          <div class="method-bottom" data-reveal><span class="connection-line" aria-hidden="true"></span><p>En ZETA LAB conectamos estrategia, creatividad y tecnología para transformar ideas en acciones.</p><span class="eyebrow">THINK &amp; CONNECT</span></div>
+        </div>
+      </section>
+
+      <section id="contacto" class="contact-section section-space journey-section" aria-labelledby="contact-title" data-guide="El siguiente paso es tuyo" data-next="Cuéntanos tu idea" data-target="#contact-options">
+        <div class="container contact-layout"><div data-reveal><span class="eyebrow"><span class="section-tick"></span> HABLEMOS DE TU PROYECTO</span><h2 id="contact-title">Las buenas ideas<br />empiezan con una<br /><span>conversación.</span><Icon name="diagonal" size={66} /></h2><p class="contact-lead">Cada proyecto tiene sus propios desafíos y oportunidades.</p></div><div class="contact-copy" data-reveal><p>Si buscas una agencia de marketing especializada en salud, quieres mejorar la comunicación de tu clínica o necesitas desarrollar una estrategia digital, estamos aquí para escucharte.</p><p>Cuéntanos qué necesitas. Compartiremos ideas y encontraremos juntos el mejor camino.</p><div id="contact-options"><a class="button button-lime" href={whatsappUrl} data-whatsapp={contact.whatsapp ? undefined : 'pending'} target={contact.whatsapp ? '_blank' : undefined} rel={contact.whatsapp ? 'noopener noreferrer' : undefined}><Icon name="whatsapp" size={21} /> Contactar por WhatsApp <Icon name="diagonal" size={19} /></a><button class="text-link" data-open-request>Prefiero contaros qué necesito <Icon name="arrow" size={19} /></button></div><span class="contact-note"><span class="status-dot"></span> Una conversación. Muchas posibilidades.</span></div></div>
+      </section>
+    </main>
+    <footer class="site-footer"><div class="container"><div class="footer-top"><Logo /><p>MARKETING Y COMUNICACIÓN<br />ESPECIALIZADOS EN SALUD</p><a href="#inicio" class="back-to-top" aria-label="Volver al inicio"><Icon name="arrow" size={23} /></a></div><div class="footer-bottom"><span>© {new Date().getFullYear()} ZETA LAB</span><span>Ideas que conectan. Personas que importan.</span><button data-open-privacy>Privacidad</button></div></div></footer>
+    <aside class="journey-guide" aria-label="Tu recorrido con ZETA LAB"><span class="guide-orbit" aria-hidden="true"><i></i></span><div class="guide-copy"><span>VAMOS CONTIGO</span><p id="guide-label">Nos conocemos</p></div><a href="#servicios" id="guide-link"><span>Conoce los servicios</span><Icon name="arrow" size={17} /></a><div class="guide-progress" aria-hidden="true"><i></i></div></aside>
+    <ContactDialogs />
+    <noscript><style>.enhanced-form,.journey-guide,[data-open-request],[data-open-privacy],#expand-services,.menu-button{display:none!important}@media(max-width:800px){#main-nav{display:flex;flex-wrap:wrap;gap:0 20px}#main-nav a{font-size:12px}.hero-content{padding-top:240px}}</style></noscript>
+    <script>
+      import '../scripts/main';
+    </script>
+  </body>
+</html>

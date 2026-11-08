@@ -1,0 +1,45 @@
+---
+import Icon from './Icon.astro';
+---
+<div class="audit-panel" data-reveal>
+  <div class="panel-topline"><span class="status-dot"></span> FORMULARIO DE CONTACTO <span>01 — 03</span></div>
+  <h3>Empecemos por conocerte.</h3>
+  <p class="panel-description">Cuéntanos un poco de tu negocio. Vamos paso a paso.</p>
+  <ol class="form-steps" aria-label="Pasos del formulario">
+    <li aria-current="step"><span>01</span> Tu negocio</li>
+    <li><span>02</span> Tus canales</li>
+    <li><span>03</span> Hablamos</li>
+  </ol>
+  <form id="audit-form" class="enhanced-form" novalidate>
+    <fieldset data-step>
+      <legend class="sr-only">Tu negocio</legend>
+      <label for="audit-company">Nombre de la clínica o empresa <span>*</span></label>
+      <input id="audit-company" name="company" autocomplete="organization" placeholder="El nombre de tu proyecto" maxlength="150" required />
+      <label for="audit-sector">Especialidad o sector <span>*</span></label>
+      <input id="audit-sector" name="sector" placeholder="Ej. odontología, medicina estética…" maxlength="150" required />
+      <p class="field-help">Cada proyecto tiene su contexto. El tuyo es nuestro punto de partida.</p>
+    </fieldset>
+    <fieldset data-step>
+      <legend class="sr-only">Tus canales digitales</legend>
+      <label for="audit-website">Página web <span class="optional">opcional</span></label>
+      <input id="audit-website" name="website" type="text" inputmode="url" autocomplete="url" placeholder="www.tuclinica.es" maxlength="500" />
+      <label for="audit-social">Redes sociales <span class="optional">opcional</span></label>
+      <textarea id="audit-social" name="social" rows="3" placeholder="Enlaces o @usuario de Instagram, LinkedIn…" maxlength="2000"></textarea>
+      <p class="field-help">Si todavía no tienes web o redes, también podemos ayudarte a empezar.</p>
+    </fieldset>
+    <fieldset data-step>
+      <legend class="sr-only">Tus datos de contacto</legend>
+      <label for="audit-name">Nombre y apellidos <span>*</span></label>
+      <input id="audit-name" name="name" autocomplete="name" placeholder="¿Cómo te llamas?" maxlength="150" required />
+      <div class="field-pair">
+        <div><label for="audit-email">Correo electrónico <span>*</span></label><input id="audit-email" name="email" type="email" autocomplete="email" placeholder="tu@email.com" maxlength="254" required /></div>
+        <div><label for="audit-phone">Teléfono / WhatsApp</label><input id="audit-phone" name="phone" type="tel" autocomplete="tel" placeholder="+34 600 000 000" maxlength="30" /></div>
+      </div>
+      <p class="field-help">Vista previa: este formulario todavía no envía ni guarda tus datos.</p>
+    </fieldset>
+    <div class="form-actions"><button type="button" class="back-button" data-back hidden><span aria-hidden="true">←</span> Volver</button><button class="button button-dark" type="submit"><span data-next-label>Continuar</span><Icon /></button></div>
+    <p class="form-status" role="status" tabindex="-1" hidden></p>
+  </form>
+  <noscript><p class="form-status">Activa JavaScript para recorrer el formulario. El análisis todavía no está disponible.</p></noscript>
+  <div class="panel-footnote"><Icon name="shield" size={15} /> Sin compromiso. A tu ritmo.</div>
+</div>
