@@ -1,4 +1,7 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/zeta-lab-logo-transparent.png';
+---
 <a class="brand" href="#inicio" title="Volver al inicio">
-  <span class="brand-name">ZETA <span>LAB</span></span>
-  <span class="brand-tagline"> THINK &amp; CONNECT</span>
+  <Image class="brand-image" src={logo} alt="ZETA LAB — Think & Connect" widths={[200, 400, 600]} sizes="(max-width: 480px) 143px, (max-width: 800px) 148px, 181px" format="webp" quality={95} loading="eager" />
 </a>
